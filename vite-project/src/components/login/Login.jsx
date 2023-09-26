@@ -7,6 +7,7 @@ const HomePage = () => {
   const [showSignIn, setShowSignIn] = useState(true);
   const navigate = useNavigate()
   const auth = useAuth()
+  console.log(process.env.REACT_APP_API_URL);
   
   const displaySignup = () => {
     setShowSignIn(false);
