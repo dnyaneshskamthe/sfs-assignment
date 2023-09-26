@@ -11,12 +11,14 @@ const ProfilePage = () => {
   const [user, setUser] = useState({});
   const token = localStorage.getItem('token')
   const auth = useAuth()
+   // Import the environment variable
+   const apiUrl = import.meta.env.VITE_APP_API_URL;
 
   useEffect(() => {
     // Fetch user profile data from your API
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/profile`,{
+        const response = await fetch(`${apiUrl}/api/users/profile`,{
           method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

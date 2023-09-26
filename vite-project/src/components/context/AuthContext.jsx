@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token, username) => {
     // Save the token in local storage or a cookie
+    console.log('auth login', token, username);
     localStorage.setItem('token', token);
     localStorage.setItem('username', username);
 

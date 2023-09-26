@@ -7,7 +7,8 @@ const HomePage = () => {
   const [showSignIn, setShowSignIn] = useState(true);
   const navigate = useNavigate()
   const auth = useAuth()
-  console.log(process.env.REACT_APP_API_URL);
+  // Import the environment variable
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
   
   const displaySignup = () => {
     setShowSignIn(false);
@@ -21,7 +22,7 @@ const HomePage = () => {
     const username = document.getElementById('signin-username').value;
     const password = document.getElementById('signin-password').value;
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/signIn`, {
+      const response = await fetch(`${apiUrl}/api/users/signIn`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -30,10 +31,12 @@ const HomePage = () => {
       });
 
       if (response.ok) {
+        alert('Sign In successful');
         const data = await response.json(); // Call login function with the token
         // Store the token in the local storage
         // localStorage.setItem("token", data.token);
         auth.login(data.token, username)
+        console.log('line 39');
         // Sign in successful, navigate to landing page
         navigate('/landingPage');
       } else {
@@ -49,7 +52,7 @@ const HomePage = () => {
     const email = document.getElementById('signup-email').value;
     const password = document.getElementById('signup-password').value;
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/signUp`, {
+      const response = await fetch(`${apiUrl}/api/users/signUp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -59,6 +62,7 @@ const HomePage = () => {
 
       if (response.ok) {
         // Sign up successful, switch to sign in view
+        alert('Sign up successful');
         displaySignIn();
       } else {
         // Handle sign up error
