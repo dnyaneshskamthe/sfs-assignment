@@ -36,7 +36,6 @@ const HomePage = () => {
         // Store the token in the local storage
         // localStorage.setItem("token", data.token);
         auth.login(data.token, username)
-        console.log('line 39');
         // Sign in successful, navigate to landing page
         navigate('/landingPage');
       } else {

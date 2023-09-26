@@ -21,7 +21,7 @@ const Header = () => {
     setShowLogoutModal(false);
     navigate('/login')
   };
-  console.log(auth.user.username);
+
   return (
     <>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

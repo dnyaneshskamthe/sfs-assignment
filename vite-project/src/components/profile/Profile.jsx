@@ -38,8 +38,11 @@ const ProfilePage = () => {
   }, []);
 
   // Handle file input change to set the profile picture
-  const handleProfilePictureChange = (e) => {
+  const handleProfilePictureChange = async (e) => {
     const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+  
     if (file) {
       setProfilePicture(file);
       const reader = new FileReader();
@@ -48,6 +51,32 @@ const ProfilePage = () => {
       };
       reader.readAsDataURL(file);
     }
+    try {
+      // Create a FormData object to send the profile picture
+      const formData = new FormData();
+    
+      // Append the image file to the FormData object
+      formData.append('image', imageFile); // Replace 'imageFile' with the actual image file
+    
+      // Send the profile picture data to the API for upload
+      const response = await fetch(`${apiUrl}/api/uploadProfilePicture`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+    
+      if (response.ok) {
+        console.log('Profile picture uploaded successfully');
+        // Optionally, you can update the user interface to reflect the new profile picture
+      } else {
+        console.error('Failed to upload profile picture');
+      }
+    } catch (error) {
+      console.error('Error uploading profile picture:', error);
+    }
+    
   };
 
   return (
